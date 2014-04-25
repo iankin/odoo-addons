@@ -9,6 +9,9 @@
         'static/src/bower_components/visualcaptcha.jquery/visualcaptcha.jquery.js',
         'static/src/js/main.js',
     ],
-    'css': ['static/src/bower_components/visualcaptcha.jquery/visualcaptcha.css',],
+    'css': [
+        'static/src/bower_components/visualcaptcha.jquery/visualcaptcha.css',
+        'static/src/css/oe_visualcaptcha.css',
+    ],
     'qweb': ['static/src/xml/visualcaptcha.xml',],
 }
