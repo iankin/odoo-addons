@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="VisualCaptcha">
-        <div class="oe_visualcaptcha"></div>
+        <div id="oe_visualcaptcha"></div>
     </t>
 </templates>
