@@ -1,15 +1,11 @@
 openerp.visualcaptcha = function (instance) {
     instance.web.FormView.include({
-        is_captcha_enabled: function(action) {
-            var attrs = this.fields_view.arch.attrs;
-            return (action in attrs) ? JSON.parse(attrs[action]) : false;
-        },
-
         load_form: function(data){
             this._super(data);
-            if (this.is_captcha_enabled('visualcaptcha')) {
+            if (this.$el.find('visualcaptcha')) {
                 var captcha = new instance.visualcaptcha.visualcaptcha(this);
-                captcha.appendTo(this.$el.find('.oe_form_container'));
+                // Replace any <visualcaptcha /> element
+                captcha.replace(this.$el.find('visualcaptcha'));
                 var captchaEl = this.$el.find('#oe_visualcaptcha');
                 captchaEl.visualCaptcha({
                     imgPath: '/visualcaptcha/static/src/img/',
