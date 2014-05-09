@@ -40,3 +40,13 @@ class Visualcaptcha(http.Controller):
         else:
             # TODO: properly raise exception
             raise('Something went wrong!')
+
+    @http.httprequest
+    def validate(self, req):
+        r = requests.get('http://localhost:8282/audio/%s?rdm=%s' % (index,
+          rdm))
+        if r.status_code == 200:
+            return r.content
+        else:
+            # TODO: properly raise exception
+            raise('Something went wrong!')
