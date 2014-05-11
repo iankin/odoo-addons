@@ -33,7 +33,8 @@
 -->
                 <div class="container">
                     <div class="oe_single_form_logo">
-                        <img src="/web/binary/company_logo"/>
+                        <h1>Open<strong>ERP</strong></h1>
+                        <h4><small>Open Source Business Applications</small></h4>
                     </div>
                     <t t-raw="0"/>
 

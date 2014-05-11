@@ -80,3 +80,11 @@
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.oe_single_form_logo > h1 {
+  color: #ff4444;
+}
+
+.oe_single_form_logo > h1 strong{
+  color: black;
+}
