@@ -1,4 +1,4 @@
-oerp-addons
+odoo-addons
 ===========
 
-Some modules I have made for OpenERP
+Some modules I have made for Odoo
