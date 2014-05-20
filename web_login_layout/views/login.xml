@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="web.layout" name="Web layout">&lt;!DOCTYPE html&gt;
+            <html style="height: 100%">
+                <head>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                    <title>OpenERP</title>
+                    <link rel="shortcut icon" href="/web/static/src/img/favicon.ico" type="image/x-icon"/>
+                    <link rel="stylesheet" href="/web/static/src/css/full.css" />
+                    <link rel="stylesheet" href="/web_login_layout/static/src/css/login.css" />
+                    <t t-raw="head or ''"/>
+                </head>
+                <body t-att-class="body_classname">
+                    <t t-raw="0"/>
+                </body>
+            </html>
+        </template>
+<!--
+        login layout
+-->
+        <template id="web.login_layout" name="Login Layout">
+            <t t-call="web.layout">
+                <t t-set="head">
+                    <link href="/web/static/src/css/base.css" rel="stylesheet"/>
+                    <link href="/web/static/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+                    <script src="/web_login_layout/static/src/js/jquery.min.js"></script>
+                    <script src="/web_login_layout/static/src/js/bootstrap.min.js"></script>
+                </t>
+<!--
+                <t t-set="body_classname" t-value="'oe_single_form'"/>
+-->
+                <div class="container">
+                    <div class="oe_single_form_logo">
+                        <h1>Open<strong>ERP</strong></h1>
+                        <h4><small>Open Source Business Applications</small></h4>
+                    </div>
+                    <t t-raw="0"/>
+
+                    <div class="oe_single_form_footer" t-if="not disable_footer">
+                        <t t-if="not disable_database_manager">
+                            <a class="oe_login_manage_db" t-attf-href="/web/database/manager{{ '?debug' if debug else '' }}">Manage Databases</a>
+                            <span class="oe_footer_seperator"> | </span>
+                        </t>
+                        <a href="http://www.openerp.com" target="_blank">Powered by <span>OpenERP</span></a>
+                    </div>
+                </div>
+            </t>
+        </template>
+<!--
+        login form
+-->
+        <template id="web.login" name="Login">
+            <t t-call="web.login_layout">
+                <form class="form-signin" role="form" t-attf-action="/web/login{{ '?debug' if debug else '' }}" method="post" onsubmit="this.action = this.action + location.hash">
+                    <img class="profile-img" src="/web_login_layout/static/src/img/avatar_2x.png" />
+                    <input type="text" name="login" t-att-value="login"
+                           id="login" class="form-control" required="required"
+                           autofocus="autofocus" placeholder="Login"/>
+                    <input type="password" name="password" id="password"
+                           class="form-control" required="required"
+                           t-att-autofocus="'autofocus' if login else None"
+                           placeholder="Password"/>
+                    <t t-call="web.database_select"/>
+                    <p class="alert alert-danger" t-if="error">
+                        <t t-esc="error"/>
+                    </p>
+                    <p class="alert alert-success" t-if="message">
+                        <t t-esc="message"/>
+                    </p>
+
+                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    <div class="clearfix oe_login_buttons">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                </form>
+            </t>
+        </template>
+<!--
+        database selection
+-->
+        <template id="web.database_select" name="Database select widget">
+<!--
+            <script type="text/javascript">
+                function dbchanged(db) {
+                    console.log(db);
+                    document.location = "/web/login?<t t-if="debug">debug&amp;</t>db=" + db;
+                }
+            </script>
+-->
+            <div class="input-group db-select" t-if="databases and len(databases) &gt; 1">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-hdd"></span>
+                    </button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <t t-foreach="databases" t-as="db">
+                            <li>
+                                <a class="db-option" href="#"><t t-esc="db"/></a>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+                <input type="text" class="form-control db-control" name="db" id="db"
+                       readonly="1"
+                       t-att-value="request.db if db == request.db else None"/>
+                <script type="text/javascript">
+                    $('a.db-option').click(function () {
+                        var db = $('input[name="db"]');
+                        db.val(this.text);
+                        document.location = "/web/login?<t t-if="debug">debug&amp;</t>db=" + db.val();
+                    });
+                </script>
+            </div>
+        </template>
+    </data>
+</openerp>
