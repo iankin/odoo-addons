@@ -9,11 +9,18 @@ openerp.web_fields_masks = function (instance) {
         },
 
         render_value: function () {
+            var self = this;
             this._super();
             if (this.mask !== '') {
-                attrs_str = "{" + this.mask.replace(/\'/g, '"') + "}";
-                attrs_dict = JSON.parse(attrs_str);
-                this.$el.find('input').inputmask(attrs_dict);
+                this.$('input').attr('data-inputmask', this.mask);
+                this.$('input').inputmask(undefined, {
+                    onincomplete: function () {
+                        self.$el.addClass('oe_form_invalid');
+                    },
+                    oncomplete: function () {
+                        self.$el.removeClass('oe_form_invalid');
+                    },
+                });
             }
         },
     });
