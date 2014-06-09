@@ -1,6 +1,7 @@
 {
     'name': 'Hide duplicate',
     'author': 'Aristobulo Meneses',
+    'version': '0.2',
     'description': '''
 Allows to hide duplicate button under <More> section
 ================================================================================
@@ -15,5 +16,8 @@ Example:
     ''',
     'category': 'web',
     'depends': ['web', ],
-    'js': ['static/src/js/duplicate.js', ],
+    'data': ['views/hide_duplicate.xml', ],
+    'installable': True,
+    'auto_install': False,
+    'web': True,
 }
