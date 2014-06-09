@@ -1,6 +1,6 @@
 {
     'name': 'Fields masks',
-    'version': '0.1',
+    'version': '0.2',
     'description': """
 Fields masks
 ================================================================================
@@ -37,13 +37,5 @@ Aliases available:
     'website': 'https://menecio.github.io',
     'category': 'web',
     'depends': ['web'],
-    'js': [
-        'static/src/js/jquery.inputmask.js',
-        'static/src/js/jquery.inputmask.extensions.js',
-        'static/src/js/jquery.inputmask.numeric.extensions.js',
-        'static/src/js/jquery.inputmask.regex.extensions.js',
-        'static/src/js/main.js',
-    ],
-    'css': [
-    ],
+    'data': ['views/assets.xml', ]
 }
